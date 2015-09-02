@@ -28,9 +28,9 @@
 
     <gap:plugin name="org.apache.cordova.splashscreen" />
 
-    <icon src="icon.png" />
+    <icon src="images/icon.png" />
 
-	<gap:splash src="splash.png" />
+	<gap:splash src="images/splash.png" />
 
     <access origin="*" />
 

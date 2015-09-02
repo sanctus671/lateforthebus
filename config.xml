@@ -1,0 +1,32 @@
+<widget id="com.taylorhamling.lateforthebus" version="2.2.0">
+        <name>Late For The Bus</name>
+        <description>
+            Late for the Bus is an app designed for Palmerston North Massey University students to make it easier to determine which bus is next available.
+        </description>
+        <author email="taylor@taylorhamling.com" href="http://www.taylorhamling.com">
+            Taylor Hamling
+        </author>
+    <content src="index.html" />
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+	<preference name="SplashScreenDelay" value="5000" />	
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-installLocation" value="auto" />
+	<gap:plugin name="org.apache.cordova.splashscreen" />
+	<gap:splash src="images/splash.png" />
+    <icon src="images/busicon.png" />		
+    <access origin="*" />		
+    <allow-intent href="http://*/*" />
+
+</widget>

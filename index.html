@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Late For The Bus</title>
+		<link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Palmerston North bus timetable web app" />
+		<meta name="keywords" content="Palmerston North, bus timetable" />
+		<meta name="viewport" content="width=1040" />
+		<link href="http://fonts.googleapis.com/css?family=Source%20Sans%20Pro:300%2C400%2C600%7CArvo%3A700" rel="stylesheet" type="text/css" />
+		
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+
+		
+		<script src="js/media.match.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
+		<script src="js/moment.min.js"></script>
+		
+	    <script src="js/enquire.min.js" type="text/javascript"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+
+		<script src="js/ga.js" type="text/javascript"></script>		
+	</head>
+	<body class="right-sidebar" data-role="page">
+	<div class="selected-date" style="display:none;"></div>
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+						
+				<!-- Header -->
+					<div id="header" class="container" data-role="header">
+						
+						<!-- Logo -->
+							<div id="logo-container"><h1 id="logo">Late For The Bus</h1></div>
+							<p>To get you to your destination... Eventually.</p>
+													<br/><a href="https://play.google.com/store/apps/details?id=com.taylorhamling.lateforthebus" target="_blank" style="text-decoration: none; border-bottom: 0px;"><img src="images/GooglePlaylogo.png" alt="Get this on the Google Store"/></a>
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li><a class="fa fa-home" href="javascript:goToAnchor('#header-wrapper',0);"><span>Home</span></a></li>
+								<li>
+									<a href="" class="fa fa-road"><span>Timetables</span></a>
+									<ul>
+										<li><a href="javascript:openTimetable('massey');">Massey Services</a></li>
+										<li><a href="javascript:openTimetable('awapuni');">Awapuni/Rugby</a></li>
+										<li><a href="javascript:openTimetable('highbury');">Highbury/Takaro</a></li>
+										<li><a href="javascript:openTimetable('cloverlea');">Cloverlea/Milson</a></li>
+                                        <li><a href="javascript:openTimetable('rhodes');">Rhodes/Roslyn</a></li>
+                                        <li><a href="javascript:openTimetable('rangiora');">Rangiora/Brightwater</a></li>
+                                        <li><a href="javascript:openTimetable('fernlea');">Fernlea/Heights</a></li>
+									</ul>
+								</li>
+
+
+									<li><a class="fa fa-phone" href="javascript:goToAnchor('#footer',0);"><span>Contact</span></a></li>
+
+								</ul>
+							</nav>
+
+					</div>
+
+			</div>
+			
+		<!-- Main Wrapper -->
+		
+			<div id="main-wrapper">
+				
+				<!-- Main -->
+					<div id="main" class="container" >
+						<div class="row">
+						
+							<!-- Content -->
+								<div id="content" class="8u skel-cell-important" data-role="content">
+
+									<!-- Post -->
+										<article class="is-post">
+											<header>
+												
+												<noscript> <h2 style="color:red">Oh no! Looks like your browser does not support JavaScript.</h2> <h3>Some features on this site may not work. <br/>Please get with the times and update your browser. </h3><br/></noscript>
+												<h2>The current time is <strong id="time"> </strong>. </h2>
+												<h3>The next bus is a <strong id="busnumber"> none </strong>  leaving at <strong id="bustime">never</strong>.</h3><br/>
+												<script>
+												function updateClock() {	
+												var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+												var d = new  Date();
+												var day = days[d.getDay()];
+												var hr = d.getHours();
+												var min = d.getMinutes();
+												if (min < 10) {
+													min = "0" + min;
+												}
+												var ampm = hr < 12 ? "am" : "pm";
+												
+												if (hr >= 12) {
+													hr = hr - 12;
+												}
+												if (hr == 0) {
+													hr = 12;
+												}
+												
+												var x = document.getElementById("time");
+												x.innerHTML = day + ", " + hr + ":" + min + ampm;
+												setTimeout(updateClock, 1000);
+												}
+												updateClock();
+												</script>												
+												
+												
+												
+												
+												
+												
+												
+
+												
+                                                                                                <a href="javascript:void(0)" class="button button-icon fa fa-refresh" id="update" >Update/Reset</a>&nbsp;&nbsp;&nbsp;
+                                                                                                <span class="loading-reset" id="centered-load"><center><img style="width:50px; height:50px; vertical-align:middle;" src='images/loading.gif'/></center></span>
+
+
+                                                                                                <span class="loading-reset" id="uncentered-load"><img style="width:50px; height:50px; vertical-align:middle;" src='images/loading.gif'/></span>
+                                                                                                <br/><br/>
+
+											</header>
+											<span class="image image-full"><div style="height:690px; width:100%;" scrolling="no" name = "bustimetable" id="bustimetable"></div></span>
+
+											 
+
+										</article>
+										<a href="javascript:void(0)" id="key" >Bus timetable key &#x25BC;</a>
+										<div id="keycontent">
+                                                                                    <div id="massey-key">
+                                                                                        <table>
+                                                                                        <tr ><td><strong>Shading Guide - Massey / IPC Services only</strong><hr/></td></tr>
+                                                                                        <tr><td>Runs all year round</td></tr>
+                                                                                        <tr style="background-color: #fbcab7;"><td>Runs during Massey semester 1 & 2, the Easter break and the mid year break between semester 1& 2</td></tr>
+                                                                                        <tr style="background-color: #e7e7e8;"><td>Runs during Massey semester 1 & 2 only</td></tr>
+                                                                                        <tr style="background-color: #e2f4fd;"><td>Runs during Massey semester 1 & 2, and the summer semester (approx Nov-Feb)</td></tr>
+                                                                                        </table>
+
+                                                                                        <table class="formatting">
+                                                                                        <tr><td>All 12 services operate between MST and Massey</td><td>IPC = International Pacific College</td></tr>
+                                                                                        <tr><td>12 Direct</td><td>MST = Main Street Terminal</td></tr>
+                                                                                        <tr><td>12A via Albert St</td><td>MU = Massey University</td></tr>
+                                                                                        <tr><td>12B via Maxwells Line</td><td>Hoko = Hokowhitu</td></tr>
+                                                                                        <tr><td>12C via Chelwood St</td><td>T = transfer at Massey required</td></tr>
+                                                                                        <tr><td>14 Between MST and IPC</td><td>* = overload services</td></tr>
+                                                                                        <tr><td>15 via Hokowhitu Campus</td><td>** = Via Atawhai</td></tr>
+                                                                                        <tr><td> </td><td>o = runs to IPC semester only</td></tr>
+                                                                                        <tr><td> </td><td>x = Summer and non-semester runs as a combined AB service</td></tr>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                    <div id="other-key">
+                                                                                        
+                                                                                        <table>
+                                                                                        <tr ><td><strong>Route Descriptions</strong><hr/></td></tr>
+                                                                                        <tr style="color: #f79239;"><td>Route 1&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Awapuni</td></tr>
+                                                                                        <tr style="color: #009e58;"><td>Route 2&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Rugby</td></tr>
+                                                                                        <tr style="color: #ed1b2f;"><td>Route 3&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Highbury</td></tr>
+                                                                                        <tr style="color: #00aeef;"><td>Route 4&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Takaro</td></tr>
+                                                                                        <tr style="color: #883d97;"><td>Route 5&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Cloverlea</td></tr>
+                                                                                        <tr style="color: #ef59a1;"><td>Route 6&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Milson</td></tr>
+                                                                                        <tr style="color: #0053a0;"><td>Route 7&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Rhodes</td></tr>
+                                                                                        <tr style="color: #c68812;"><td>Route 8&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Roslyn</td></tr>
+                                                                                        <tr style="color: #005542;"><td>Route 9&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Rangiora</td></tr>
+                                                                                        <tr style="color: #fcb655;"><td>Route 10&nbsp;-&nbsp;&nbsp;Brightwater</td></tr>
+                                                                                        <tr style="color: #008c99;"><td>Route 31&nbsp;-&nbsp;&nbsp;Fernlea</td></tr>
+                                                                                        <tr style="color: #f79239;"><td>Route 32&nbsp;-&nbsp;&nbsp;Heights</td></tr>
+                                                                                        
+                                                                                        
+                                                                                        </table>                                                                                        
+                                                                                    </div>
+										</div>
+								</div>
+								
+							<!-- Sidebar -->
+								<div id="sidebar" class="4u">
+								
+									<!-- Excerpts -->
+										<section>
+											<ul class="divided">
+												<li>
+
+													<!-- Excerpt -->
+													
+														<article class="is-excerpt">
+															<header>
+																<div class="formatting"><br/><br/><br/><br/><br/><br/><br/></div><span class="date">Options</span>
+																<h3><a href="javascript:void(0)">Refine your search.</a></h3>
+															</header>
+
+														
+														
+														<form id="massey-checkboxes">
+														<input type="radio" name="type" value="from" id="from-check"> From Massey <br/>
+														<input type="radio" name="type" value="to" id="to-check" checked> To Massey <br/><br/>
+														
+														<input type="checkbox" name="12" id="12" checked> 12 <br/>
+														<input type="checkbox" name="12A" id="12A" checked> 12A <br/>
+														<input type="checkbox" name="12B" id="12B" checked> 12B<br/>
+														<input type="checkbox" name="12C" id="12C" checked> 12C<br/>
+														<input type="checkbox" name="14" id="14" checked> 14<br/>
+														<input type="checkbox" name="15" id="15" checked> 15<br/>
+														<input type="checkbox" name="custom-check" id="custom-check" checked><input type="text" size="4" name="custom-code" id="custom-code" checked><br/>
+														<input type="checkbox" name="all" id="all" checked> All<br/>
+														<input type="checkbox" name="holidays" id="holiday"> Hide buses not running <br/>
+														</form>
+														
+														</article>
+
+												</li>
+												<li>
+
+													<!-- Excerpt -->
+														<article class="is-excerpt">
+															<header>
+
+																<h3><a href="javascript:void(0)">Select a time in the future.</a></h3>
+															</header>
+
+															<form name="form1" action="http://www.taylorhamling.com/lateforthebus/bus2.php" target="bustimetable" method="POST" id="futureform">
+
+															Date/Time:<br/><input type="datetime-local" name="future" id="future-date-input" style="width:100%;">
+
+
+															<a style="margin-top:10px;" href="javascript:void(0)" class="button button-icon fa fa-clock-o" id="futurebutton">Go</a>
+
+															</form>
+
+														</article>
+
+												</li>
+											</ul>
+
+										</section>
+								</div>
+						</div>
+								
+					</div>
+			</div>
+
+	
+				<!-- Footer -->
+					<div id="footer" class="container" data-role="footer">
+						<header>
+							<h2>Questions or comments? <strong>Get in touch:</strong></h2>
+						</header>
+						<div class="row">
+							<div class="6u">
+								<section>
+								<div id="success-message" style="color:green;display:none;">Email sent successfully</div>
+									<form class="form" id="contactform" name="contactform" action="scripts/email.php" method="POST">
+										<div class="row half">
+											<div class="6u">
+												<input name="name" placeholder="Name" type="text" class="text" required/>
+											</div>
+											<div class="6u">
+												<input name="email" placeholder="Email" type="email" class="text" required/>
+											</div>
+										</div>
+										<div class="row half">
+											<div class="12u">
+												<textarea name="text" placeholder="Message" required></textarea>
+											</div>
+										</div>
+										<div class="row half">
+											<div class="12u">
+												<a href="javascript:void(0)" onClick="$('#contactform').submit()" class="button button-icon fa fa-envelope">Send Message</a>
+											</div>
+										</div>
+									</form>
+								</section>
+							</div>
+							<div class="6u">
+								<section>
+									<p>Late For The Bus is created by Taylor Hamling. If you have a question or want your own website/app, do not hesitate to get in touch!</p>
+									<div class="row">
+										<ul class="icons 6u">
+											<li class="fa fa-home">
+												<a href="http://www.taylorhamling.com" target="_blank">taylorhamling.com</a>
+											</li>
+
+											<li class="fa fa-envelope">
+												<a href="mailto:taylor@taylorhamling.com">taylor@taylorhamling.com</a>
+											</li>
+										</ul>
+										<ul class="icons 6u">
+
+											<li class="fa fa-facebook">
+												<a href="http://facebook.com/taylorhamlingwebdesign" target="_blank">facebook.com/taylorhamlingwebdesign</a>
+											</li>
+											<li class="fa fa-google-plus">
+												<a href="http://google.com/+TaylorHamling" target="_blank">google.com/+TaylorHamling</a>
+											</li>
+										</ul>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+
+				<!-- Copyright -->
+					<div id="copyright" class="container">
+						<ul class="links">
+							<li>&copy; Late For The Bus. All rights reserved</li>
+
+						</ul>
+					</div>
+
+
+
+<script type="text/javascript" charset="utf-8" src="js/main.js"></script>	
+		
+	</body>
+</html>

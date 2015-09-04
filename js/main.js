@@ -458,32 +458,31 @@ $( "#holiday" ).change(function(){
 			console.log(element.css('background-color') == 'rgb(251, 202, 183)');
 			if (element.css('background-color') == 'rgb(251, 202, 183)'){
 				//console.log("semester 1, semester 2, eater break, mid year break");
-				if (!(selectedDate.isBetween(currentYear + '-02-25', currentYear + '-08-20') || selectedDate.isBetween(currentYear + '-09-10', currentYear + '-10-10'))){
+				if (!(selectedDate.isBetween(currentYear + '-02-23', currentYear + '-11-11') )){
 					element.hide("slow");
 				}
-				//semester 1 + easter break + mid year break + semester 2 (first half): , 25th feb - 20th aug, 10th sep - 10th nov				
-
-			}
-			else if(element.css('background-color') == 'rgb(226, 244, 253)'){
-				//console.log("semester 1, semester 2, summer semester");
-				if (!(selectedDate.isBetween(lastYear + '-10-10', lastYear + '-12-24') || selectedDate.isBetween(currentYear + '-01-05', currentYear + '-02-10') || 
-				selectedDate.isBetween(currentYear + '-02-25', currentYear + '-04-01') || selectedDate.isBetween(currentYear + '-04-20', currentYear + '-06-20') ||
-				selectedDate.isBetween(currentYear + '-07-15', currentYear + '-08-20') || selectedDate.isBetween(currentYear + '-09-10', currentYear + '-10-10'))){
-					element.hide("slow");
-				}
-				//summer school: november 20th - 24th dec, 5th jan - 10th feb
-				//semester 1: , 25th feb-1st april, 20th april - 20th june,
-				//semester 2: 15th July - 20th aug, 10th sep - 10th nov
+				//semester 1 - semester 2: , 23th feb - 11th nov				
 
 			}
 			else if(element.css('background-color') == 'rgb(231, 231, 232)'){
 				//console.log("semester 1 and 2 only");
-				if (!(selectedDate.isBetween(currentYear + '-02-25', currentYear + '-04-01') || selectedDate.isBetween(currentYear + '-04-20', currentYear + '-06-20') || 
-				selectedDate.isBetween(currentYear + '-07-15', currentYear + '-08-20') || selectedDate.isBetween(currentYear + '-09-10', currentYear + '-10-10'))){
+				if (!(selectedDate.isBetween(currentYear + '-02-23', currentYear + '-06-20') || selectedDate.isBetween(currentYear + '-07-13', currentYear + '-11-11'))){
+					element.hide("slow");
+				}
+				//semester 1: 23rd feb - 20th june,
+				//semester 2: 13th July - 11th nov
+
+			}
+			else if(element.css('background-color') == 'rgb(226, 244, 253)'){
+				//console.log("semester 1, semester 2, summer semester");
+				
+				if (!(selectedDate.isBetween(currentYear + '-02-23', currentYear + '-06-20') || selectedDate.isBetween(currentYear + '-07-13', currentYear + '-11-11') || 
+				selectedDate.isBetween(currentYear + '-11-16', nextYear + '-02-20') || selectedDate.isBetween(lastYear + '-11-17', currentYear + '-02-14'))){
 					element.hide("slow");
 				}				
-				//semester 1: , 25th feb-1st april, 20th april - 20th june,
-				//semester 2: 15th July - 20th aug, 10th sep - 10th nov				
+				//semester 1: 23rd feb - 20th june,
+				//semester 2: 13th July - 11th nov	
+				//summer semester: 16th Nov - 20th feb 2016 + 17th Nov 2014 - 14th feb 2015
 			}
 
 	});
@@ -493,32 +492,31 @@ $( "#holiday" ).change(function(){
 			var element = $(myTable2.find("tbody tr")[index]);
 			if (element.css('background-color') == 'rgb(251, 202, 183)'){
 				//console.log("semester 1, semester 2, eater break, mid year break");
-				if (!(selectedDate.isBetween(currentYear + '-02-25', currentYear + '-08-20') || selectedDate.isBetween(currentYear + '-09-10', currentYear + '-10-10'))){
+				if (!(selectedDate.isBetween(currentYear + '-02-23', currentYear + '-11-11') )){
 					element.hide("slow");
 				}
-				//semester 1 + easter break + mid year break + semester 2 (first half): , 25th feb - 20th aug, 10th sep - 10th nov				
-
-			}
-			else if(element.css('background-color') == 'rgb(226, 244, 253)'){
-				//console.log("semester 1, semester 2, summer semester");
-				if (!(selectedDate.isBetween(lastYear + '-10-10', lastYear + '-12-24') || selectedDate.isBetween(currentYear + '-01-05', currentYear + '-02-10') || 
-				selectedDate.isBetween(currentYear + '-02-25', currentYear + '-04-01') || selectedDate.isBetween(currentYear + '-04-20', currentYear + '-06-20') ||
-				selectedDate.isBetween(currentYear + '-07-15', currentYear + '-08-20') || selectedDate.isBetween(currentYear + '-09-10', currentYear + '-10-10'))){
-					element.hide("slow");
-				}
-				//summer school: november 20th - 24th dec, 5th jan - 10th feb
-				//semester 1: , 25th feb-1st april, 20th april - 20th june,
-				//semester 2: 15th July - 20th aug, 10th sep - 10th nov
+				//semester 1 - semester 2: , 23th feb - 11th nov				
 
 			}
 			else if(element.css('background-color') == 'rgb(231, 231, 232)'){
 				//console.log("semester 1 and 2 only");
-				if (!(selectedDate.isBetween(currentYear + '-02-25', currentYear + '-04-01') || selectedDate.isBetween(currentYear + '-04-20', currentYear + '-06-20') || 
-				selectedDate.isBetween(currentYear + '-07-15', currentYear + '-08-20') || selectedDate.isBetween(currentYear + '-09-10', currentYear + '-10-10'))){
+				if (!(selectedDate.isBetween(currentYear + '-02-23', currentYear + '-06-20') || selectedDate.isBetween(currentYear + '-07-13', currentYear + '-11-11'))){
+					element.hide("slow");
+				}
+				//semester 1: 23rd feb - 20th june,
+				//semester 2: 13th July - 11th nov
+
+			}
+			else if(element.css('background-color') == 'rgb(226, 244, 253)'){
+				//console.log("semester 1, semester 2, summer semester");
+				
+				if (!(selectedDate.isBetween(currentYear + '-02-23', currentYear + '-06-20') || selectedDate.isBetween(currentYear + '-07-13', currentYear + '-11-11') || 
+				selectedDate.isBetween(currentYear + '-11-16', nextYear + '-02-20') || selectedDate.isBetween(lastYear + '-11-17', currentYear + '-02-14'))){
 					element.hide("slow");
 				}				
-				//semester 1: , 25th feb-1st april, 20th april - 20th june,
-				//semester 2: 15th July - 20th aug, 10th sep - 10th nov				
+				//semester 1: 23rd feb - 20th june,
+				//semester 2: 13th July - 11th nov	
+				//summer semester: 16th Nov - 20th feb 2016 + 17th Nov 2014 - 14th feb 2015
 			}
 
 	});
